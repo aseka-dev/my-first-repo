@@ -1,43 +1,45 @@
-import xml.etree.ElementTree as ET
+def add(x, y):
+    return x + y
 
-vehicle_xml_data_as_string = "<motorvehicles><vehicle type='car'><registration_no>CBB1456</registration_no><make>Toyota</make><model>Premio</model></vehicle><vehicle type='van'><registration_no>PR2245</registration_no><make>Mazda</make><model>Bongo</model></vehicle></motorvehicles>"
+def subtract(x, y):
+    return x - y
 
-root = ET.fromstring(vehicle_xml_data_as_string)
+def multiply(x, y):
+    return x * y
 
-print("Root Tag:")
-print(root.tag)
+def divide(x, y):
+    if y == 0:
+        return "Error! Division by zero."
+    else:
+        return x / y
 
-print("\nRoot Attributes:")
-print(root.attrib)
+def calculator():
+    print("Select operation:")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
 
-print("\nIterate the children nodes:")
+    choice = input("Enter choice(1/2/3/4): ")
 
-for child in root:
-  print(child.tag, child.attrib)
-  
-print("\nAccessing by index:")
-root[0][1].text
+    if choice in ['1', '2', '3', '4']:
+        num1 = float(input("Enter first number: "))
+        num2 = float(input("Enter second number: "))
 
-print("\nAccessing atttributes:")
-for attr in root[0].attrib:
-  print(attr+ "=" + root[0].attrib[attr])
+        if choice == '1':
+            print(f"The result is: {add(num1, num2)}")
 
-print("\nSearching with Iter:")
-for element in root.iter(tag='registration_no'):
-  print(element.text)
+        elif choice == '2':
+            print(f"The result is: {subtract(num1, num2)}")
 
-print("\nSearching with findall:")
-for element in root.findall('vehicle'):
-  regno= element.find('registration_no').text
-  make= element.find('make').text
-  print(regno, make)
-  print("\nModifying XML:")
-for element in root.iter(tag='make'):
-  newmake = 'Nissan'
-  element.text = newmake
+        elif choice == '3':
+            print(f"The result is: {multiply(num1, num2)}")
 
-print("\nSearching after modifying:")
-for element in root.findall('vehicle'):
-  regno= element.find('registration_no').text
-  make= element.find('make').text
-  print(regno, make)
+        elif choice == '4':
+            print(f"The result is: {divide(num1, num2)}")
+
+    else:
+        print("Invalid input")
+
+if __name__ == "__main__":
+    calculator()
